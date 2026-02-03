@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Toolkit v2.1</title>
+
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+
+  <body>
+    <div class="wrap">
+      <!-- Header -->
+      <header class="header">
+        <div>
+          <h1>Toolkit <span class="muted">v2.1</span></h1>
+          <p class="sub">
+            Generate Orchard workbook + assets zip from your delivery package.
+          </p>
+        </div>
+
+        <div class="chip" id="statusChip">Idle</div>
+      </header>
+
+      <!-- Main grid -->
+      <main class="grid">
+        <!-- LEFT: New Job -->
+        <section class="card">
+          <h2>New job</h2>
+
+          <form id="jobForm">
+            <div class="row">
+              <label class="field">
+                <span>Project code</span>
+                <input
+                  id="projectCode"
+                  name="projectCode"
+                  type="text"
+                  placeholder="PF321"
+                  autocomplete="off"
+                  required
+                />
+              </label>
+
+              <label class="field">
+                <span>Release date</span>
+
+                <div class="dateWrap">
+                  <input
+                    id="releaseDate"
+                    name="releaseDate"
+                    type="date"
+                    required
+                  />
+
+                  <!-- Icon does NOT open picker -->
+                  <button
+                    type="button"
+                    class="dateIcon"
+                    id="dateIconBtn"
+                    aria-label="Calendar"
+                    title="Calendar"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1.5A2.5 2.5 0 0 1 22 6.5v13A2.5 2.5 0 0 1 19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H6V3a1 1 0 0 1 1-1Zm12.5 8h-15v9.5c0 .276.224.5.5.5h15c.276 0 .5-.224.5-.5V10Zm0-2V6.5a.5.5 0 0 0-.5-.5H18v1a1 1 0 1 1-2 0V6H8v1a1 1 0 1 1-2 0V6H4.5a.5.5 0 0 0-.5.5V8h15Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </label>
+            </div>
+
+            <label class="field">
+              <span>ZIP file(s)</span>
+              <input
+                id="zips"
+                name="zips"
+                type="file"
+                accept=".zip"
+                multiple
+                required
+              />
+              <span class="help">
+                You can select multiple ZIPs. Large files supported.
+              </span>
+            </label>
+
+            <div class="actions">
+              <button class="btn primary" type="submit" id="startBtn">
+                Start job
+              </button>
+
+              <button class="btn" type="button" id="clearBtn">
+                Clear
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- RIGHT: Output -->
+        <section class="card output">
+          <h2>Output</h2>
+
+          <!-- Progress -->
+          <div class="progressWrap">
+            <div class="progressTop">
+              <div class="muted" id="jobMeta">No job running.</div>
+              <div class="muted" id="pctLabel">0%</div>
+            </div>
+
+            <div class="progressBar">
+              <div
+                class="progressFill"
+                id="progressFill"
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Downloads -->
+          <div class="downloadRow">
+            <a class="btn disabled" id="downloadWorkbook" href="#" download>
+              Download workbook
+            </a>
+
+            <a class="btn disabled" id="downloadAssets" href="#" download>
+              Download assets zip
+            </a>
+
+            <a class="btn subtle disabled" id="downloadLog" href="#" download>
+              Download log
+            </a>
+          </div>
+
+          <!-- Logs -->
+          <div class="logs">
+            <div class="logsHeader">
+              <span>Logs</span>
+              <button
+                class="btn subtle"
+                type="button"
+                id="copyLogsBtn"
+              >
+                Copy
+              </button>
+            </div>
+
+            <pre id="logBox" class="logBox">Ready.</pre>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer muted">
+        Local: <code>http://localhost:3000</code>
+      </footer>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

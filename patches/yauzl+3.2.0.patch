@@ -1,0 +1,19 @@
+diff --git a/node_modules/yauzl/index.js b/node_modules/yauzl/index.js
+index 0810cc6..155c0a9 100644
+--- a/node_modules/yauzl/index.js
++++ b/node_modules/yauzl/index.js
+@@ -727,6 +727,14 @@ function getFileNameLowLevel(generalPurposeBitFlag, fileNameBuffer, extraFields,
+ }
+ 
+ function validateFileName(fileName) {
++  // 🔧 Toolkit v2.1 patch:
++  // Some zips contain bogus entries like "/" or "//"
++  // Strip leading slashes so yauzl doesn't throw "absolute path: /"
++  fileName = String(fileName || "").replace(/^[\/\\]+/, "");
++
++  // If it was just "/" (or similar), treat as harmless and skip
++  if (!fileName) return null;
++
+   if (fileName.indexOf("\\") !== -1) {
+     return "invalid characters in fileName: " + fileName;
+   }
